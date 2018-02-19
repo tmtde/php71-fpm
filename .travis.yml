@@ -9,4 +9,4 @@ install:
 
 script:
   - docker ps | grep -q fpm-71
-  - docker run -i fpm-71-test php -v | grep -E "^PHP\s7\.1"
+  - docker run -i tmtde/fpm-71 php -v | grep -E "^PHP\s7\.1"
