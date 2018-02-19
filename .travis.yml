@@ -1,0 +1,13 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+install:
+  - docker build -t tmtde/fpm-71 .
+  - docker run -i tmtde/fpm-71
+
+script:
+  - docker ps | grep -q fpm-71
+  - docker run -i tmtde/fpm-71 php -m | grep -i opache
