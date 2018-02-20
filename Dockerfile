@@ -12,6 +12,7 @@ ENV EXT_DEPS \
   zlib-dev \
   icu-dev \
   gettext-dev
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN set -xe; \
   apk update && apk add --no-cache $EXT_DEPS \
@@ -26,14 +27,10 @@ RUN set -xe; \
   && docker-php-ext-configure zip \
   && docker-php-ext-install zip \
   && docker-php-ext-configure opcache \
-  && docker-php-ext-install opcache
-
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && chmod +x /usr/local/bin/composer
-
-# Cleanup build deps
-#  8 # clean up build deps
-RUN apk del .build-deps \
+  && docker-php-ext-install opcache \
+  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && chmod +x /usr/local/bin/composer \
+  # Cleanup build deps
+  #  8 # clean up build deps
+  && apk del .build-deps \
   && rm -rf /tmp/* /var/cache/apk/*
