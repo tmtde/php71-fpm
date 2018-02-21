@@ -15,7 +15,8 @@ ENV EXT_DEPS \
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN set -xe; \
-  apk update && apk add --no-cache $EXT_DEPS \
+  apk --no-cache update && apk --no-cache upgrade \
+  && apk add --no-cache $EXT_DEPS \
   && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
   && docker-php-ext-configure xsl \
   && docker-php-ext-install xsl \
