@@ -2,6 +2,23 @@ FROM php:7.1-fpm-alpine
 
 MAINTAINER Thomas Appel <thomas.appel@tmt.de>
 
+ARG BUILD_DATE
+ARG BUILD_VERSION
+ARG VCS_URL
+ARG VCS_REF
+ARG VCS_BRANCH
+
+# See http://label-schema.org/rc1/ and https://microbadger.com/labels
+LABEL org.label-schema.name="PHP 7.1 - FastCGI Process Manager" \
+    org.label-schema.description="PHP-FPM 7.1 (with some more extentions installed)" \
+    org.label-schema.vendor="TMT GmbH & Co. KG" \
+    org.label-schema.schema-version="1.0" \
+    org.label-schema.build-date="${BUILD_DATE:-unknown}" \
+    org.label-schema.version="${BUILD_VERSION:-unknown}" \
+    org.label-schema.vcs-url="${VCS_URL:-unknown}" \
+    org.label-schema.vcs-ref="${VCS_REF:-unknown}" \
+    org.label-schema.vcs-branch="${VCS_BRANCH:-unknown}"
+
 ENV EXT_DEPS \
   pkgconfig \
   libxml2-dev \
